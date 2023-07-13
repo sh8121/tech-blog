@@ -150,7 +150,7 @@ RemoteController<Radio> radioRemoteController1 = new RemoteController<Radio>(rad
 ```
 
 와 같은 형태로 리모컨 객체를 만들어낼 수 있고   
-RemoteController\<Tv\> tvRemoteController1 = new RemoteController\<Tv\>(tv1);   
+RemoteController&lt;Tv&gt; tvRemoteController1 = new RemoteController&lt;Tv&gt;(tv1);   
 이 리모컨 객체에 한해서 마치 리모컨 클래스가   
 
 ```java
@@ -167,7 +167,7 @@ public class RemoteController {
 }
 ```
 
-이렇게 정의된 것처럼 동작합니다. 이때 RemoteController\<Tv\>의 Tv를 **parameterized type이라고** 하며 타입 변수 Device에 실제 타입 Tv가 적용됐다 라고 생각하시면 됩니다.   
+이렇게 정의된 것처럼 동작합니다. 이때 RemoteController&lt;Tv&gt;의 Tv를 **parameterized type이라고** 하며 타입 변수 Device에 실제 타입 Tv가 적용됐다 라고 생각하시면 됩니다.   
 (JDK가 실제로 이렇게 동작한다는 건 아닙니다 ^^;; 이 부분은 나중에 type erasure를 다루면서 상세히 얘기해 보겠습니다.)   
 
 ### "컴파일 타임 타입 체크를 가능하게 하여 타입 안정성을 높이고 형 변환의 번거로움을 줄여주는 것"
@@ -184,7 +184,7 @@ System.out.println(connectedRadio.getName());
 
 제네릭 RemoteController를 사용하는 개발자의 사고의 흐름은 이렇습니다.   
 
-1.  tvRemoteController1 참조 변수의 선언부를 확인한다. 이 리모컨에 연결된 디바이스가 Tv임이 명시되어 있다.(RemoteController\<Tv\> tvRemoteController1 = new RemoteController\<Tv\>(tv1);)
+1.  tvRemoteController1 참조 변수의 선언부를 확인한다. 이 리모컨에 연결된 디바이스가 Tv임이 명시되어 있다.(RemoteController&lt;Tv&gt; tvRemoteController1 = new RemoteController&lt;Tv&gt;(tv1);)
 2.  번거로운 형 변환 없이 tvRemoteController1.getConnectedDevice()를 Tv 변수로 받는다. 컴파일러도 타입 변수에 Tv가 할당되었음을 알기 때문에 태클을 걸지 않는다.
 3.  radioRemoteController1에 대해서도 같은 과정을 반복한다.
 

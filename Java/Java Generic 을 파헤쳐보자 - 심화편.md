@@ -102,7 +102,7 @@ class org.example.generic.RemoteController
 class org.example.generic.RemoteController
 ```
 
-타입 인자를 전달하여 선언한 RemoteController\<Tv\>와 RemoteController\<Radio\> 객체에 대한 런타임 클래스 정보를 보면 차이가 없는 것을 알 수 있습니다. Tv, Radio 라는 타입인자가 클래스 레벨에 전달되는 것이 아니라 객체 단위로 전달되는 것이기 때문에 어찌 보면 당연한 결과입니다.   
+타입 인자를 전달하여 선언한 RemoteController&lt;Tv&gt;와 RemoteController&lt;Radio&gt; 객체에 대한 런타임 클래스 정보를 보면 차이가 없는 것을 알 수 있습니다. Tv, Radio 라는 타입인자가 클래스 레벨에 전달되는 것이 아니라 객체 단위로 전달되는 것이기 때문에 어찌 보면 당연한 결과입니다.   
 이렇듯 제네릭과 관련된 소스 코드 상의 정보들은 컴파일러에 의해 제거되는데 이러한 특징을 Type Erasure 라고 합니다.   
 제네릭이 이러한 방식으로 동작하는 가장 큰 이유는 제네릭의 없던 시절에 작성된 코드, 그러니까 JDK5 이전의 코드와의 호환성 이슈 때문입니다.   
 결국 제네릭은 런타임 실행 코드에는 영향을 주지 않으면서 컴파일 타임에 개발자에게 Type Safety 를 포함한 편의 기능을 제공하는 방식으로 동작하는데 이러한 특징 때문에 Java Generic 을 syntactic sugar 라고 하기도 합니다.   
@@ -119,7 +119,7 @@ public class TvRemoteController extends RemoteController<Tv> {
 }
 ```
 
-위와 같이 RemoteController\<Device\> 를 상속받아서 TvRemoteController 를 정의하거나   
+위와 같이 RemoteController&lt;Device&gt; 를 상속받아서 TvRemoteController 를 정의하거나   
 
 ```java
 public class RadioRemoteController {
@@ -135,7 +135,7 @@ public class RadioRemoteController {
 }
 ```
 
-위와 같이 RemoteController\<Device\> 객체를 포함하여 RadioRemoteController 를 정의할 수 있습니다.   
+위와 같이 RemoteController&lt;Device&gt; 객체를 포함하여 RadioRemoteController 를 정의할 수 있습니다.   
 이런 경우 TvRemoteController, RadioRemoteController 는 클래스 레벨에서 각각 Tv, Radio 타입 인자에 의존하기 때문에 리플렉션을 통해 타입 인자 정보를 확인할 수 있습니다.   
 
 ```java
@@ -206,8 +206,8 @@ RemoteController<Electronics> tvRemoteController = new RemoteController<Tv>(tv);
 RemoteController<Electronics> radioRemoteController = new RemoteController<Radio>(radio); //compile error
 ```
 
-RemoteController\<Electronics\> 참조변수로 RemoteController\<Tv\>, RemoteController\<Radio\> 객체를 받을 수 없습니다.   
-제네릭의 불공변 때문에 RemoteController\<Electronics\> 와 RemoteController\<Tv\> 는 전혀 상관 없는 타입으로 인정되기 때문입니다.   
+RemoteController&lt;Electronics&gt; 참조변수로 RemoteController&lt;Tv&gt;, RemoteController&lt;Radio&gt; 객체를 받을 수 없습니다.   
+제네릭의 불공변 때문에 RemoteController&lt;Electronics&gt; 와 RemoteController&lt;Tv&gt; 는 전혀 상관 없는 타입으로 인정되기 때문입니다.   
 제네릭 자체가 Type Safety 를 도모하기 위해 탄생한 개념인 만큼 제네릭의 불공변성은 어찌보면 당연한 것 같습니다. 하지만 불공변성 때문에 사용하는 입장에서 유연성이 너무 떨어지는 단점도 있습니다.   
 이러한 문제점을 해결하기 위해 Java Generic 에서 추가적으로 지원하는 기능이 와일드카드(?) 라는 개념입니다.   
 
@@ -219,7 +219,7 @@ RemoteController<?> tvRemoteController = new RemoteController<Tv>(tv);
 RemoteController<?> radioRemoteController = new RemoteController<Radio>(radio);
 ```
 
-위처럼 RemoteController\<?\> 타입의 참조변수는 해당 타입 매개변수 위치에 어떤 타입이 오든 받을 수 있으며, 위 코드는 정상 동작 합니다.   
+위처럼 RemoteController&lt;?&gt; 타입의 참조변수는 해당 타입 매개변수 위치에 어떤 타입이 오든 받을 수 있으며, 위 코드는 정상 동작 합니다.   
 와일드카드를 쓰면서 동시에 받을 수 있는 타입 인자에 제약을 줄 수도 있는데 이때 extends 와 super 키워드를 사용합니다.   
 
 ```java
@@ -230,14 +230,14 @@ RemoteController<? extends Electronics> tvRemoteController = new RemoteControlle
 RemoteController<? extends Electronics> radioRemoteController = new RemoteController<Radio>(radio);
 ```
 
-\<? extends Electronics\> 는 Electronics 의 하위 타입들(Electronics 포함)을 받을 수 있으며, 이러한 경우를 Upper Bounded Wildcard 라고 합니다.   
+&lt;? extends Electronics&gt; 는 Electronics 의 하위 타입들(Electronics 포함)을 받을 수 있으며, 이러한 경우를 Upper Bounded Wildcard 라고 합니다.   
 
 ```java
 Electronics electronics = new Electronics();
 RemoteController<? super Tv> remoteController = new RemoteController<Electronics>(electronics);
 ```
 
-\<? super Tv\> 는 Tv 의 상위 타입들(Tv 포함)을 받을 수 있으며, 이러한 경우를 Lower Bounded Wildcard 라고 합니다.   
+&lt;? super Tv&gt; 는 Tv 의 상위 타입들(Tv 포함)을 받을 수 있으며, 이러한 경우를 Lower Bounded Wildcard 라고 합니다.   
 PECS 란 Producer, 즉 데이터를 생산해내는(조회 기능으로 이해하면 됩니다.) Component 에서는 extends 를 사용하고 Consumer, 즉 데이터를 소비하는(저장, 수정 등의 기능) Component 에서는 super 를 사용한다는 의미입니다.   
 
 ```java
@@ -252,13 +252,13 @@ for (Electronics e : electronics) {
 }
 ```
 
-위의 코드에서 List\<? extends Electronics\> electronics 는 '내가 참조하는 리스트 객체의 element 는 정확한 타입이 먼지는 모르겠지만 아무튼 Electronics 의 하위타입이기는 하다' 라고 해석됩니다. 때문에 for(Electronics e: electronics) 와 같은 코드가 가능합니다. 참조하는 객체가 new ArrayList\<Tv\>() 이던, new ArrayList\<Radio\>() 이던 그 element 들을 Electronics 로 받을 수 있기 때문이죠.   
+위의 코드에서 List&lt;? extends Electronics&gt; electronics 는 '내가 참조하는 리스트 객체의 element 는 정확한 타입이 먼지는 모르겠지만 아무튼 Electronics 의 하위타입이기는 하다' 라고 해석됩니다. 때문에 for(Electronics e: electronics) 와 같은 코드가 가능합니다. 참조하는 객체가 new ArrayList&lt;Tv&gt;() 이던, new ArrayList&lt;Radio&gt;() 이던 그 element 들을 Electronics 로 받을 수 있기 때문이죠.   
 
 ```java
 electronics.add(new Tv("티비4")); //compile error
 ```
 
-반면 위 코드는 컴파일 에러를 냅니다. electronics 가 참조하는 객체가 new ArrayList\<Tv\>() 일수도 있지만 new ArrayList\<Radio\>() 일수도 있기 때문에 Tv 객체의 등록을 허락하지 않습니다.   
+반면 위 코드는 컴파일 에러를 냅니다. electronics 가 참조하는 객체가 new ArrayList&lt;Tv&gt;() 일수도 있지만 new ArrayList&lt;Radio&gt;() 일수도 있기 때문에 Tv 객체의 등록을 허락하지 않습니다.   
 
 ```java
 List<? super Electronics> list = new ArrayList<Electronics>();
@@ -267,7 +267,7 @@ list.add(new Radio("라디오"));
 list.add(new Electronics());
 ```
 
-위 코드에서 List\<? super Electronics\> list 는 '내가 참조하는 리스트 객체의 element 는 먼지는 모르겠지만 Electronics 의 상위타입이기는 하다' 라고 해석됩니다. 따라서 위 코드는 정상 동작합니다. List\<? super Electronics\> list 가 참조하는 객체가 new ArrayList\<Object\>() 이건, new ArrayList\<Electronics\>() 이건 Tv, Radio, Electronics 객체를 담을 수 있기 때문이죠.   
+위 코드에서 List&lt;? super Electronics&gt; list 는 '내가 참조하는 리스트 객체의 element 는 먼지는 모르겠지만 Electronics 의 상위타입이기는 하다' 라고 해석됩니다. 따라서 위 코드는 정상 동작합니다. List&lt;? super Electronics&gt; list 가 참조하는 객체가 new ArrayList&lt;Object&gt;() 이건, new ArrayList&lt;Electronics&gt;() 이건 Tv, Radio, Electronics 객체를 담을 수 있기 때문이죠.   
 
 ```java
 for(Electronics e : list) { //compile error
@@ -275,7 +275,7 @@ for(Electronics e : list) { //compile error
 }
 ```
 
-반면 위 코드는 컴파일 에러를 냅니다. list 변수가 참조하는 객체가 new ArrayList\<Electronics\>() 라면 문제가 없겠지만 new ArrayList\<Object\>() 라면 문제가 생기기 때문이죠.   
+반면 위 코드는 컴파일 에러를 냅니다. list 변수가 참조하는 객체가 new ArrayList&lt;Electronics&gt;() 라면 문제가 없겠지만 new ArrayList&lt;Object&gt;() 라면 문제가 생기기 때문이죠.   
 이렇듯 for(Electronics e : electronics) 처럼 데이터를 제공하는 Producer 에서는 extends 를 사용하고 list.add(...) 처럼 데이터를 소비하는 Consumer 에서는 super 를 사용하는 것을 PECS 라고 합니다.   
 
 지금까지 Java Generic 을 사용하면서 주의해야하는 심화 개념들을 알아봤습니다.     
