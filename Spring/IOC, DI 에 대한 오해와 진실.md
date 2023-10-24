@@ -1,4 +1,4 @@
-Spring, IOC, DI, OOP
+IOC, DI 에 대한 오해와 진실
 =====================
 ![Spring 로고](https://github.com/sh8121/tech-blog/assets/20632477/6d1be92a-ea3c-436a-80bc-55abb93a9e84)
 
