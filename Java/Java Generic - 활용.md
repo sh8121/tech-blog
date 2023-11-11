@@ -1,4 +1,4 @@
-Java Generic 을 파헤쳐보자 - 활용편
+Java Generic - 활용
 ==============================
 ![Java 로고](https://github.com/sh8121/tech-blog/assets/20632477/cbd53d33-6261-4ed2-9521-26ea826b8644)
 

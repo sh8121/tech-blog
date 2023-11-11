@@ -1,4 +1,4 @@
-PSA 제대로 이해하기
+Spring Triangle - PSA
 ====================
 ![Spring 로고](https://github.com/sh8121/tech-blog/assets/20632477/6d1be92a-ea3c-436a-80bc-55abb93a9e84)
 
