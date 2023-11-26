@@ -7,7 +7,7 @@ Java Generic - 심화
 ## 1. Type Erasure
 Java Generic 을 관통하는 주요 개념 중에 Type Erasure 라는 개념이 있습니다.   
 이론적으로는 Generic 을 운영하기 위해 부가적으로 들어간 소스코드들이 바이트코드 레벨에서는 모두 제거되는 것을 의미하는데요.   
-[개념편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EA%B0%9C%EB%85%90%ED%8E%B8 "Java Generic 을 파헤쳐보자 - 개념편")에서 다루었던 예제를 기반으로 좀 더 상세히 알아보겠습니다.   
+[개념편](https://sh8121.tistory.com/entry/Java-Generic-%EA%B0%9C%EB%85%90 "Java Generic - 개념")에서 다루었던 예제를 기반으로 좀 더 상세히 알아보겠습니다.   
 
 ```java
 public class Tv {
@@ -279,6 +279,6 @@ for(Electronics e : list) { //compile error
 이렇듯 for(Electronics e : electronics) 처럼 데이터를 제공하는 Producer 에서는 extends 를 사용하고 list.add(...) 처럼 데이터를 소비하는 Consumer 에서는 super 를 사용하는 것을 PECS 라고 합니다.   
 
 지금까지 Java Generic 을 사용하면서 주의해야하는 심화 개념들을 알아봤습니다.     
-[개념편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EA%B0%9C%EB%85%90%ED%8E%B8) 에서 주로 'Java Generic 의 주된 목적(Type Safety)과 기본적인 사용 방법' 을 다루었다면 이번 '심화편' 에서는 'Java Generic 의 독특한 특성들' 에 대해서 다뤄 보았습니다.     
+[개념편](https://sh8121.tistory.com/entry/Java-Generic-%EA%B0%9C%EB%85%90) 에서 주로 'Java Generic 의 주된 목적(Type Safety)과 기본적인 사용 방법' 을 다루었다면 이번 '심화편' 에서는 'Java Generic 의 독특한 특성들' 에 대해서 다뤄 보았습니다.     
 이 독특한 특성들을 잘 활용하면 'Type Safety' 를 지키면서도 '유연한' 코드를 작성할 수 있습니다. 실제로 많은 제네릭 기반의 라이브러리들이 이 특성을 적절하게 활용하고 있고요.     
 다음 포스팅에서는 이러한 특성들을 실제 Application 개발에서 어떻게 사용할 수 있는지에 대한 이야기를 해보겠습니다.      

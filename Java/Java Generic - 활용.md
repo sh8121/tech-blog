@@ -4,7 +4,7 @@ Java Generic - 활용
 
 Java Generic 시리즈 마지막 포스팅입니다.   
 이번에는 Java Generic 을 활용하는 여러 가지 상황들에 대해 살펴보겠습니다.   
-이번 포스팅에서도 [개념편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EA%B0%9C%EB%85%90%ED%8E%B8), [심화편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EC%8B%AC%ED%99%94%ED%8E%B8) 에서 사용했던 예제를 활용해보겠습니다.   
+이번 포스팅에서도 [개념편](https://sh8121.tistory.com/entry/Java-Generic-%EA%B0%9C%EB%85%90), [심화편](https://sh8121.tistory.com/entry/Java-Generic-%EC%8B%AC%ED%99%94) 에서 사용했던 예제를 활용해보겠습니다.   
 ```java
 public class Electronics {
     private String manufacturer;
@@ -97,7 +97,7 @@ for (Object o : tvList) {
 Runtime 에 ClassCastException 이 발생할 수 있다는 점을 감수한다면 말이죠.   
 
 여기서 잠시 변성(variance)이라는 개념에 대해서 짚고 넘어가 보겠습니다.   
-[심화편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EC%8B%AC%ED%99%94%ED%8E%B8) 에서 PECS 를 설명하는 과정에서 Java Generic 은 불공변(invariance) 의 특징을 갖는다고 언급했었는데요, invariance 가 variance 의 종류 중 하나입니다.   
+[심화편](https://sh8121.tistory.com/entry/Java-Generic-%EC%8B%AC%ED%99%94) 에서 PECS 를 설명하는 과정에서 Java Generic 은 불공변(invariance) 의 특징을 갖는다고 언급했었는데요, invariance 가 variance 의 종류 중 하나입니다.   
 즉, 변성(variance)은 '서로 다른 타입 간에 어떤 관계가 있는가' 에 대한 개념이고 변성의 한 종류로서 불공변(invariance), '서로 다른 타입 간에 어떤 관계도 없는 것'이 있는 거죠. 참고로 변성의 다른 종류로는 공변(covariance), 반공변(contravariance), 이변(bivariance) 등이 있습니다.   
 변성의 종류를 다른 방식으로 나누는 방법도 있는데요, 바로 '변성이 언제 정해지는가' 를 기준으로 나누는 방식입니다.   
 ```java
@@ -175,7 +175,7 @@ printManufacturer(radioList);
 ```
 이렇게 와일드카드(?) 를 적절하게 적용하는 것 만으로 Generic 의 활용도를 높일 수 있습니다.   
 
-지금까지 Collection 에서 Generic 을 활용하는 예제를 살펴보았는데요, [개념편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EA%B0%9C%EB%85%90%ED%8E%B8)과 [심화편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EC%8B%AC%ED%99%94%ED%8E%B8)에서 Generic 을 이해하기 위해 사용했던 코드들과 큰 차이점을 못 느끼셨을 수도 있겠습니다. 이번에는 좀 더 복잡한 활용 예제를 살펴보겠습니다.   
+지금까지 Collection 에서 Generic 을 활용하는 예제를 살펴보았는데요, [개념편](https://sh8121.tistory.com/entry/Java-Generic-%EA%B0%9C%EB%85%90)과 [심화편](https://sh8121.tistory.com/entry/Java-Generic-%EC%8B%AC%ED%99%94)에서 Generic 을 이해하기 위해 사용했던 코드들과 큰 차이점을 못 느끼셨을 수도 있겠습니다. 이번에는 좀 더 복잡한 활용 예제를 살펴보겠습니다.   
 
 ## 2. Type Token
 이번에는 Type Parameter 를 통해 객체를 저장하고 조회하는 기능을 구현해 보겠습니다.   
@@ -302,7 +302,7 @@ ParameterizedType parameterizedType = (ParameterizedType)tvList.getClass().getGe
 System.out.println(parameterizedType); //java.util.ArrayList<org.example.generic.Tv>
 System.out.println(parameterizedType.getActualTypeArguments()[0]); //class org.example.generic.Tv
 ```
-위처럼 제네릭 타입을 상속받아서 클래스를 정의한 경우 제네릭 타입 정보가 유지된다고 [심화편](https://velog.io/@sh8121/Java-Generic-%EC%9D%84-%ED%8C%8C%ED%97%A4%EC%B3%90%EB%B3%B4%EC%9E%90-%EC%8B%AC%ED%99%94%ED%8E%B8) 에서 간단히 다뤘었는데요. 이번 기회에 코드를 좀 더 들여다 보고 넘어가겠습니다.   
+위처럼 제네릭 타입을 상속받아서 클래스를 정의한 경우 제네릭 타입 정보가 유지된다고 [심화편](https://sh8121.tistory.com/entry/Java-Generic-%EC%8B%AC%ED%99%94) 에서 간단히 다뤘었는데요. 이번 기회에 코드를 좀 더 들여다 보고 넘어가겠습니다.   
 코드에서 보시는 것처럼 TvList Class 객체의 getGenericSuperclass() 는 ParameterizedType 이라는 타입의 객체를 반환하는데요, 이게 바로 ArrayList&lt;Tv&gt; 처럼 'Runtime 에도 유지되는 제네릭 타입 정보' 를 위한 인터페이스 입니다. 참고로 TvList 처럼 제네릭 타입을 상속받은게 아니라면 getGenericSuperclass() 는 단순히 부모 타입의 Class 객체를 반환합니다. 그래서 getGenericSuperclass() 의 선언부를 보면 Class&lt;T&gt; 와 ParameterizedType 의 공통 부모인 Type 을 반환합니다.   
 위처럼 Reflection 을 활용하는 것은 익명 클래스에서도 동일하게 가능합니다.   
 ```java
